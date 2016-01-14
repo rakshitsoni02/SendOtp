@@ -28,10 +28,10 @@ Step 4. implement 'VerificationListener' and change APPLICATION_KEY in you activ
 
 Step 5. On your button click (Requesting OTP) and get result in Initiate callback
 
-Config config = SendOtpVerification.config().applicationKey(APPLICATION_KEY).context(getApplicationContext())
-        .build();
-        mVerification = SendOtpVerification.createSmsVerification(config, phoneNumber, this, countryCode);
-              mVerification.initiate();
+//Config config = SendOtpVerification.config().applicationKey(APPLICATION_KEY).context(getApplicationContext())
+      //  .build();
+      //  mVerification = SendOtpVerification.createSmsVerification(config, phoneNumber, this, countryCode);
+        //      mVerification.initiate();
 Step 6. On verify button click or you detect sms call below method and get result in verification callback
             mVerification.verify(code); 
         
