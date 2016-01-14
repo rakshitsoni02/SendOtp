@@ -37,7 +37,8 @@ Step 6. On verify button click or you detect sms call below method and get resul
             mVerification.verify(code); 
         
 Step 7. You will get result of request in callbacks like:
- ```javascript
+```javascript
+
    @Override
    public void onInitiated() {
      Log.d(TAG, "Initialized!");
