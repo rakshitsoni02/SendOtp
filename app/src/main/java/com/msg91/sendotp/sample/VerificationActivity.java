@@ -24,7 +24,7 @@ import com.msg91.sendotp.library.VerificationListener;
 public class VerificationActivity extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback, VerificationListener {
 
   private static final String TAG = Verification.class.getSimpleName();
-  private final String APPLICATION_KEY = "KedFus_S5FBTYyPC-XjwKHmAn0jt9pqC1oa4iPhj6GyWyh-lQfJsYNC_D6lgKDu5PsPQwSAFwLsalKfuRmp1uscmdvAWJFhntjODOYz3i_OE2Ii-kE4kCdo4LlE50GVwFDAha0JTx_0EPtD6UQ88uGn7UutOyUtcw3GyjQNb2Ko=";
+  private final String APPLICATION_KEY = "your-app-key";
   private Verification mVerification;
 
   @Override
