@@ -8,7 +8,7 @@
 /library/build/*
 /app/app.iml
 /gradle.properties
-
+/library
 /gradlew.bat
 /Sample.iml
 /.gradle
