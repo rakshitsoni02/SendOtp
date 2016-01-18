@@ -78,7 +78,11 @@ public class ApiService {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    Log.e("Response", "" + httpResponse.toString());
+    try {
+      Log.e("Response", "" + httpResponse.body().string());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     return httpResponse;
   }
 }
