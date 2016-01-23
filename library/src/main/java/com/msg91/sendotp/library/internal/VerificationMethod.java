@@ -4,6 +4,9 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Build;
@@ -11,6 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
+import android.util.Base64;
 import android.util.Log;
 
 import com.msg91.sendotp.library.InvalidInputException;
@@ -19,6 +23,8 @@ import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
 
 import java.lang.reflect.Method;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import okhttp3.Response;
 
@@ -72,7 +78,6 @@ public class VerificationMethod implements Verification {
           if (response.code() == 200) {
             //TODO temp exception
             callbackInitiated();
-//            callbackVerificationFailed(new CodeInterceptionException("not found"));
           } else {
             callbackInitiationFailed(new Exception(response.message()));
           }

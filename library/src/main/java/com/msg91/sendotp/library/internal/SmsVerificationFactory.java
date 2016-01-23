@@ -8,7 +8,7 @@ public class SmsVerificationFactory {
 
   public static Verification create(Config config, String number, VerificationListener listener, String country, String keyWord) {
     if (!config.getApplicationKey().isEmpty() && !config.getApplicationKey().equals("")) {
-      ApiService apiService = new ApiService(config.getApplicationKey());
+      ApiService apiService = new ApiService(config.getApplicationKey(), config.getContext());
       return new VerificationMethod(config.getContext(), number, apiService, listener, new AndroidCallbackHandler(), country, keyWord);
     } else throw new IllegalArgumentException("ApplicationKey cannot be null or Invalid.");
   }
