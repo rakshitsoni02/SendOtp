@@ -160,8 +160,8 @@ public class VerificationActivity extends AppCompatActivity implements ActivityC
   }
 
   @Override
-  public void onVerified() {
-    Log.d(TAG, "Verified!");
+  public void onVerified(String response) {
+    Log.d(TAG, "Verified!\n" + response);
     hideProgressBarAndShowMessage(R.string.verified);
     showCompleted();
   }

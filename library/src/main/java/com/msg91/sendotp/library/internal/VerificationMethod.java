@@ -4,9 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Build;
@@ -14,7 +11,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.telephony.SmsMessage;
 import android.telephony.TelephonyManager;
-import android.util.Base64;
 import android.util.Log;
 
 import com.msg91.sendotp.library.InvalidInputException;
@@ -22,9 +18,8 @@ import com.msg91.sendotp.library.ServiceErrorException;
 import com.msg91.sendotp.library.Verification;
 import com.msg91.sendotp.library.VerificationListener;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 import okhttp3.Response;
 
@@ -143,7 +138,7 @@ public class VerificationMethod implements Verification {
   protected void onVerificationResult(Response response) {
     try {
       if (response.code() == 200)
-        this.callbackVerified();
+        this.callbackVerified(response);
     } catch (Exception var2) {
       this.callbackVerificationFailed(new ServiceErrorException("SendOtp backend service error: cannot parse success reply from server."));
     }
@@ -203,11 +198,15 @@ public class VerificationMethod implements Verification {
     });
   }
 
-  protected void callbackVerified() {
+  protected void callbackVerified(final Response response) {
     this.runOnCallbackHandler(new Runnable() {
       public void run() {
         mContext.unregisterReceiver(receiver);
-        VerificationMethod.this.mListener.onVerified();
+        try {
+          VerificationMethod.this.mListener.onVerified(response.body().string());
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
     });
   }
